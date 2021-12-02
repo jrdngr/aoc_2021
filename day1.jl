@@ -1,5 +1,7 @@
 include("./utils.jl")
 
+inputs = read_to_array("inputs/1_1", Int64)
+
 # --- Day 1: Sonar Sweep ---
 # You're minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!
 
@@ -43,9 +45,7 @@ include("./utils.jl")
 
 # How many measurements are larger than the previous measurement?
 
-function day1()
-    inputs = read_to_array("inputs/1_1", Int64)
-
+function num_increases(inputs)
     total = 0
     last = inputs[1]
     
@@ -58,6 +58,28 @@ function day1()
     
     total
 end
+
+function day1_1(inputs)
+    num_increases(inputs)
+end
+
+test = [
+    199,
+    200,
+    208,
+    210,
+    200,
+    207,
+    240,
+    269,
+    260,
+    263,
+]
+println("Test 1-1: $(day1_1(test))")
+
+println("Day 1-1: $(day1_1(inputs))")
+# Day 1-1: 1548
+
 
 # --- Part Two ---
 # Considering every single measurement isn't as useful as you expected: there's just too much noise in the data.
@@ -91,9 +113,18 @@ end
 # In this example, there are 5 sums that are larger than the previous sum.
 
 # Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
-function day2()
+function day1_2(inputs)
+    window_sums = []
 
+    for i in 3:length(inputs)
+        sum = inputs[i] + inputs[i-1] + inputs[i-2]
+        push!(window_sums, sum)
+    end
+
+    num_increases(window_sums)
 end
 
-println("Increases in depth: $(day1())")
-# Increases in depth: 1548
+println("Test 1-2: $(day1_2(test))")
+
+println("Day 1-2: $(day1_2(inputs))")
+# Day 1-2: 1589

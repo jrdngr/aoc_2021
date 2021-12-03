@@ -7,8 +7,11 @@ function read_to_array(path::String, type::Type)
        
             # read a new / next line for every iteration          
             s = readline(f)
-            input = parse(type, s)
-            push!(result, input)
+            if type == String
+                push!(result, s)
+            else
+                push!(result, parse(type, s))
+            end
         end
     end
 

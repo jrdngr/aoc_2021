@@ -164,6 +164,7 @@ function day3_2(inputs)
     remaining_oxygen = Set(inputs)
     remaining_c02 = Set(inputs)
 
+    # TODO: Move this up into the first loop
     for i in 1:length(keep)
         if length(remaining_oxygen) > 1
             for o in remaining_oxygen
